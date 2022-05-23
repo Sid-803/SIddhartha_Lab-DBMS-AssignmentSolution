@@ -139,3 +139,9 @@ insert into rating values(16,116,0);
 Select * from customer join orderr on customer.CUS_ID = orderr.CUS_ID and ORD_AMOUNT>=3000 and customer.CUS_GENDER = "M" ;
 /*Gives  count of customers with customer names customers with order amount >=3000*/
 Select  customer.CUS_NAME,count(customer.CUS_GENDER) from customer join orderr on customer.CUS_ID = orderr.CUS_ID and ORD_AMOUNT>=3000  group by customer.CUS_NAME;
+
+/*4*/
+Select product.PRO_NAME, orderr.ORD_AMOUNT,orderr.CUS_ID
+from product join supplier_pricing on product.PRO_ID = supplier_pricing.PRO_ID
+join orderr on orderr.PRICING_ID=supplier_pricing.PRICING_ID
+where orderr.CUS_ID=2;
