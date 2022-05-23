@@ -145,3 +145,12 @@ Select product.PRO_NAME, orderr.ORD_AMOUNT,orderr.CUS_ID
 from product join supplier_pricing on product.PRO_ID = supplier_pricing.PRO_ID
 join orderr on orderr.PRICING_ID=supplier_pricing.PRICING_ID
 where orderr.CUS_ID=2;
+
+/*5*/
+Select * from supplier where SUPP_ID IN(
+Select supplier_pricing.SUPP_ID
+from supplier_pricing join supplier 
+on supplier_pricing.SUPP_ID=supplier.SUPP_ID 
+group by supplier_pricing.SUPP_ID 
+having count(supplier_pricing.PRO_ID)>1
+);
