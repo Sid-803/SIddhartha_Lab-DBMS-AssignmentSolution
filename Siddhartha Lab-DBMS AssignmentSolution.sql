@@ -154,3 +154,25 @@ on supplier_pricing.SUPP_ID=supplier.SUPP_ID
 group by supplier_pricing.SUPP_ID 
 having count(supplier_pricing.PRO_ID)>1
 );
+
+
+/*6*/
+Select category.CAT_ID,
+category.CAT_NAME,
+product.PRO_NAME,
+min(supplier_pricing.SUPP_PRICE)
+from product join supplier_pricing on product.PRO_ID = supplier_pricing.PRO_ID
+join category on  product.CAT_ID= category.CAT_ID
+group by category.CAT_ID
+
+/*7*/
+Select product.PRO_ID,
+product.PRO_NAME,
+orderr.ORD_DATE
+from orderr join supplier_pricing on orderr.PRICING_ID = supplier_pricing.PRICING_ID
+join product on supplier_pricing.PRO_ID = product.PRO_ID
+where orderr.ORD_DATE > '2021-10-05'
+
+/*8*/
+Select CUS_NAME, CUS_GENDER from customer
+where customer.CUS_NAME LIKE 'A%' or customer.CUS_NAME LIKE '%A'
